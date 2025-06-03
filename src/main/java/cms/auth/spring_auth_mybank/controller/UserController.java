@@ -21,9 +21,12 @@ public class UserController {
 
     @PostMapping(value = "/verifyUser")
     public ResponseEntity<String> verifyUser(@RequestBody UserDTO userDTO) {
-        String jwtToken = "";
+        String jwtToken = userService.verifyUser(userDTO);
+        if (jwtToken != null && !jwtToken.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.OK).body(jwtToken);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Invalid Username or Password");
 
-        return ResponseEntity.status(HttpStatus.OK).body(jwtToken);
     }
 
 

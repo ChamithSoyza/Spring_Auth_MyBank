@@ -13,4 +13,7 @@ public interface UserRepository extends JpaRepository<UserEntity, Integer>, JpaS
     @Query(value = "SELECT * FROM user WHERE username =:username", nativeQuery = true)
     public abstract UserEntity findUserByName(@Param("username") String username);
 
+    @Query(value = "SELECT permission_id, permission FROM permission P INNER JOIN role_permission RP on P.id = RP.permission_id INNER JOIN role R ON RP.role_id = R.id WHERE role = 'admin';", nativeQuery = true)
+    public abstract String findScopes(Integer userId);
+
 }
