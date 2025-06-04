@@ -53,7 +53,7 @@ public class JwtUtil {
         return new ArrayList<>();
     }
 
-    private Optional<String> extractUsername(String token) {
+    public Optional<String> extractUsername(String token) {
         if (!isTokenExpired(token)) {
             return Optional.of(extractAllClaims(token).getSubject());
         }
