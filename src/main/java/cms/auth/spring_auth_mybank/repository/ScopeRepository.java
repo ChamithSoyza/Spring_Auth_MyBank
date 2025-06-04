@@ -10,6 +10,10 @@ import java.util.List;
 
 @Repository
 public interface ScopeRepository extends JpaRepository<ScopeEntity, Integer> {
+    /**
+     * @param roleId
+     * @return
+     */
     @Query(value = "SELECT permission_id, permission FROM permission P INNER JOIN role_permission RP ON P.id = RP.permission_id INNER JOIN role R ON RP.role_id = R.id WHERE role_id =:roleId;", nativeQuery = true)
     public abstract List<ScopeEntity> findScopes(@Param("roleId") Integer roleId);
 }
