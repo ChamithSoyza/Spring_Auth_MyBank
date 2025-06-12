@@ -2,10 +2,12 @@ package cms.auth.spring_auth_mybank.controller;
 
 import cms.auth.spring_auth_mybank.dto.GoldDTO;
 import cms.auth.spring_auth_mybank.service.GoldService;
+import cms.auth.spring_auth_mybank.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +20,7 @@ public class GoldController {
     private GoldService goldService;
 
     @GetMapping(value = "/getAllGold")
-    //    @PreAuthorize()
+    @PreAuthorize("hasAuthority('" + Constants.GOLD_GET_ALL + "')")
     public ResponseEntity<List<GoldDTO>> getAllGold() {
         return ResponseEntity.status(HttpStatus.OK).body(goldService.getAllGold());
     }
